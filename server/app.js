@@ -21,6 +21,8 @@ var options = {
   }
 }
 
+app.use(express.static("client"));
+
 app.get('/', function(req, res){
   res.sendFile('index.html', options, function(err){
     if (err) {
