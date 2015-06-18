@@ -1,3 +1,5 @@
+// incomplete animations
+
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var MainView = React.createClass({
@@ -11,6 +13,8 @@ var MainView = React.createClass({
 
         <div id="jcgCapitalChart"></div>
         <div id="jcgCapitalMenu"></div>
+        <div id="jcgCapitalEditor"></div>
+
 
       </div>
     )

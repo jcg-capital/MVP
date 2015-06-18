@@ -33,4 +33,4 @@
     },
   });
 
-React.render(React.createElement(Editor), document.getElementById('editor'))
+React.render(React.createElement(Editor), document.getElementById('jcgCapitalEditor'));
