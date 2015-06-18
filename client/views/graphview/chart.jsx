@@ -103,5 +103,5 @@ var chart = React.render(
   React.createElement(Chart, {
     seriesModel: seriesObject, 
     chartModel: chartObject}),
-  document.getElementById('example')
+  document.getElementById('jcgCapitalApp')
 );
