@@ -12,3 +12,45 @@
     font-family: Lato;
     font-size: 13px;
 }
+
+
+/* MENUBAR STYLING*/
+		.navigation {
+		    background-color: #CCC;
+		    width: 42.75em;
+		    height: 1.3em;
+		}
+		a {
+		    text-decoration: none;
+		    color: #FFF;
+		    font-family: Arial;
+		}
+		a:hover {
+		    background-color: #DDD;
+		    text-decoration: none;
+		}
+		.navigation__item {
+		    display: inline-block;
+		    vertical-align: center;
+		    top: 0px;
+		    margin: 0px 5px;
+		}
+
+		.navigation__dropdown {
+		    display: none;
+		    position:absolute;
+		    list-style: none;
+		    width:60px;
+		    text-align: center;
+		    background-color:#999;
+		    padding: 0px;
+		    margin:0px;
+		}
+		a.navigation__dropdown__link {
+		    list-style: none;
+		}
+
+		.navigation__dropdown--open {
+		    display: block;
+		}
+/* END --  MENUBAR STYLING*/
