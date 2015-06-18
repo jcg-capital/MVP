@@ -22,7 +22,7 @@
     "express": "^4.12.4",
     "node": "0.0.0",
     "react": "^0.13.3",
-    "requirejs": "^2.1.18"
+    "requirejs": "^2.1.18",
   },
   "devDependencies": {
     "browser-sync": "^1.6.5",

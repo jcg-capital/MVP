@@ -44,7 +44,7 @@ var MenuBar = React.createClass({
         }
     },
     openDropdown: function (id) {
-        console.log('open!');
+        // console.log('open!');
         this.setState({
             openDropdown: id
         });
@@ -79,7 +79,7 @@ var MenuBar = React.createClass({
                     dropdownClass += ' navigation__dropdown--open';
                 }
                 
-                console.log(this.state.openDropdown, index);
+                // console.log(this.state.openDropdown, index);
 
                 dropdown = (
                     <ul className={ dropdownClass }>
@@ -124,4 +124,4 @@ var menuitems =    [
         }
     ]
 
-React.render(<MenuBar config={ menuitems } />, document.getElementById('jcgCapitalApp'));
+React.render(<MenuBar config={ menuitems } />, document.getElementById('jcgCapitalMenu'));
