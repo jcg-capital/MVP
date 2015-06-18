@@ -7,3 +7,5 @@ var Chart = React.createClass({
         )
     }
 })
+
+React.render(<Chart />, document.body);
