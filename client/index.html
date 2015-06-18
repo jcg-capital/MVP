@@ -12,12 +12,77 @@
 
     <!-- add components here -->
     <script src="views/graphview/chart.jsx" type="text/jsx"></script>
-
+    <script src="views/codeeditorview/MenuBarView.jsx" type="text/jsx"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react-with-addons.js"></script>
   </head>
   <body>
+  <style media="screen" type="text/css">
+    .navigation {
+        background-color: #CCC;
+        width: 42.75em;
+        height: 1.3em;
+    }
+    a {
+        text-decoration: none;
+        color: #FFF;
+        font-family: Arial;
+    }
+    a:hover {
+        background-color: #DDD;
+        text-decoration: none;
+    }
+    .navigation__item {
+        display: inline-block;
+        vertical-align: center;
+        top: 0px;
+        margin: 0px 5px;
+    }
 
+    .navigation__dropdown {
+        display: none;
+        position:absolute;
+        list-style: none;
+        width:60px;
+        text-align: center;
+        background-color:#999;
+        padding: 0px;
+        margin:0px;
+    }
+    a.navigation__dropdown__link {
+        list-style: none;
+    }
+
+    .navigation__dropdown--open {
+        display: block;
+    }
+  </style>
     <div id="example"></div>
-
+    <div id="menubar"></div>
+    <div id='editor'></div>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/javascript");
+        var textarea = $('#code-input');
+        hljs.initHighlightingOnLoad();
+        var codeBlock;
+        var RunCode;
+        $(document).ready(function(){
+            RunCode = function() {
+                prompt('RUN THIS CODE: \n'+ editor.getSession().getValue())
+            }
+            editor.on("change", function(e){
+                console.log(e)
+                //console.log(editor.getSession().getValue())
+                textarea.text('')
+                codeBlock = editor.getSession().getValue()
+                textarea.append(codeBlock);
+                $('pre code').each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+            })         
+        })
+    </script>
   </body>
 </html>
 
