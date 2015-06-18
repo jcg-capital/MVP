@@ -25,7 +25,6 @@ var options = {
 }
 
 app.use(express.static("client"));
-console.log(process.env)
 
 app.get('/', function(req, res){
   res.sendFile('index.html', options, function(err){
