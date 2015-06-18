@@ -1,0 +1,175 @@
+
+<style media="screen" type="text/css">
+.navigation {
+    background-color: #CCC;
+    width: 42.75em;
+    height: 1.3em;
+}
+a {
+    text-decoration: none;
+    color: #FFF;
+    font-family: Arial;
+}
+a:hover {
+    background-color: #DDD;
+}
+.navigation__item {
+    display: inline-block;
+    vertical-align: center;
+    top: 0px;
+    margin: 0px 5px;
+}
+
+.navigation__dropdown {
+    display: none;
+    position:absolute;
+    list-style: none;
+    width:60px;
+    text-align: center;
+    background-color:#999;
+    padding: 0px;
+    margin:0px;
+}
+a.navigation__dropdown__link {
+    list-style: none;
+}
+
+.navigation__dropdown--open {
+    display: block;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.12.2/react.min.js"></script>
+<script src="https://fb.me/react-0.13.3.js"></script>
+<script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"  type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.9/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.9/theme-monokai.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.9/mode-javascript.js"   type="text/javascript" charset="utf-8"></script>
+<div id='MenuBar' ></div>
+
+
+<script type="text/jsx">
+var MenuBar = React.createClass({
+    getInitialState: function () {
+        return {
+            openDropdown: -1
+        };
+    },
+    getDefaultProps: function () {
+        return {
+            config: []
+        }
+    },
+    openDropdown: function (id) {
+    console.log('open!');
+        this.setState({
+            openDropdown: id
+        });
+    },
+    closeDropdown: function () {
+        this.setState({
+            openDropdown: -1
+        });
+    },
+    propTypes: {
+        config: React.PropTypes.array
+    },
+    render: function () {
+        var config = this.props.config;
+
+        var items = config.map(function (item, index) {
+            var children, dropdown;
+            if (item.children) {
+                children = item.children.map(function (child) {
+                    return (
+                        <li className="navigation__dropdown__item">
+                            <a className="navigation__dropdown__link" href='#!'>
+                                { child.text }
+                            </a>
+                        </li>
+                    );
+                });
+
+                var dropdownClass = 'navigation__dropdown';
+                if (this.state.openDropdown === index) {
+                    dropdownClass += ' navigation__dropdown--open';
+                }
+                
+                console.log(this.state.openDropdown, index);
+
+                dropdown = (
+                    <ul className={ dropdownClass }>
+                        { children }
+                    </ul>
+                );
+            }
+            return (
+                <li className="navigation__item" onMouseOut={ this.closeDropdown } onMouseOver={ this.openDropdown.bind(this, index) }>
+                    <a className="navigation__link" href='#!'>
+                        { item.text }
+                    </a>
+
+                    { dropdown }
+                </li>
+                );
+        }, this);
+
+        return (
+            <div className="navigation">
+                { items }
+            </div>
+            );
+    }
+});
+
+var menuitems =    [
+        {'text':'File',
+            'children': [{'text':'Open'},{'text':'Close'}]
+        },
+        {'text': 'Edit',
+            'children': [{'text':'Open'},{'text':'Close'}]
+        },
+        {'text':'Selection',
+            'children': [{'text':'Open'},{'text':'Close'}]
+        },
+        {'text':'Find',
+            'children': [{'text':'Open'},{'text':'Close'}]
+        },
+        {'text':'Preferences',
+            'children': [{'text':'Open'},{'text':'Close'}]
+        }
+    ]
+
+React.render(<MenuBar config={ menuitems } />, document.getElementById('MenuBar'));
+
+</script>
+
+
+<div id='editor'></div>
+<script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+    var textarea = $('#code-input');
+    hljs.initHighlightingOnLoad();
+    var codeBlock;
+    var RunCode;
+    $(document).ready(function(){
+        RunCode = function() {
+            prompt('RUN THIS CODE: \n'+ editor.getSession().getValue())
+        }
+        editor.on("change", function(e){
+            console.log(e)
+            //console.log(editor.getSession().getValue())
+            textarea.text('')
+            codeBlock = editor.getSession().getValue()
+            textarea.append(codeBlock);
+            $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
+            });
+        })         
+    })
+</script>
+</body>
+</html>

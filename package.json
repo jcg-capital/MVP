@@ -44,6 +44,9 @@
     "quandl": "0.0.4",
     "run-sequence": "^1.1.0",
     "sass-loader": "^1.0.2",
+    "highlight": "^0.2.3",
+    "jquery": "^2.1.4",
+    "ace-builds": "git+https://github.com/ajaxorg/ace-builds.git",
     "webpack": "^1.9.11",
     "webpack-dev-server": "^1.9.0"
   },
