@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></script> 
     <script src="react-with-addons.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/modules/data.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <!-- added in browser jsx transformer -->
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+
+    <!-- add components here -->
+    <script src="views/graphview/chart.jsx" type="text/jsx"></script>
 
   </head>
   <body>
 
     <div id="example"></div>
-    <script src="views/graphview/chart.js"></script>
 
   </body>
 </html>
