@@ -8,6 +8,9 @@ var MainView = React.createClass({
         <h3><strong>Partners:</strong> J. A. Munsch, G. H. Fitzgerald, and C. S. Harding</h3>
         <div id="jcgCapitalApp">
         </div>
+
+            <div id="rangeSlider"></div>
+            
       </div>
     )
   }
