@@ -46,6 +46,40 @@ app.get('/node_modules/*', function(req, res){
     })
 })
 
+app.get('/client/*', function(req, res){
+  var options = {
+    root: __dirname + '/../',
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp' : Date.now(),
+      'x-sent' : true
+    }
+  }
+  options.root = options.root + path.parse(req.url).dir
+  res.sendFile(path.parse(req.url).base, options, function(err){
+      if (err) {
+        console.log(err, options)
+      } 
+    })
+})
+
+app.get('/build/*', function(req, res){
+  var options = {
+    root: __dirname + '/../',
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp' : Date.now(),
+      'x-sent' : true
+    }
+  }
+  options.root = options.root + path.parse(req.url).dir
+  res.sendFile(path.parse(req.url).base, options, function(err){
+      if (err) {
+        console.log(err, options)
+      } 
+    })
+})
+
 
 app.get('/', function(req, res){
   res.sendFile('index.html', options, function(err){

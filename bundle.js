@@ -45,10 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	__webpack_require__(2);
-	__webpack_require__(3);
-	__webpack_require__(4);
-	module.exports = __webpack_require__(5);
+	module.exports = __webpack_require__(2);
 
 
 /***/ },
@@ -57,8 +54,8 @@
 
 	/** @jsx React.DOM *//** @jsx React.DOM */
 
-	var Chart = React.createClass({displayName: "Chart",
-
+	var Chart = React.createClass({
+	  displayName: "Chart",
 	  initializeChart: function() {
 	    var chartModel = this.props.chartModel;
 	    var seriesModel = this.props.seriesModel;
@@ -89,79 +86,13 @@
 
 	});
 
-	var seriesObject = [{
-	      name: 'Year 1800',
-	      data: [107, 31, 635, 203, 2]
-	  }, {
-	      name: 'Year 1900',
-	      data: [133, 156, 947, 408, 6]
-	  }, {
-	      name: 'Year 2008',
-	      data: [973, 914, 1000, 732, 34]
-	}];
 
-	var chartObject = {
-	   chart: {
-	       renderTo: 'container',
-	       type: 'line',
-	   },
-	   title: {
-	       text: 'Historic World Population by Region'
-	   },
-	   subtitle: {
-	       text: 'Source: Wikipedia.org'
-	   },
-	   xAxis: {
-	       categories: ['Africans', 'America', 'Asia', 'Europe', 'Oceania'],
-	       title: {
-	           text: null
-	       }
-	   },
-	   yAxis: {
-	       min: 0,
-	       title: {
-	           text: 'Population (millions)',
-	           align: 'high'
-	       },
-	       labels: {
-	           overflow: 'justify'
-	       }
-	   },
-	   tooltip: {
-	       formatter: function() {
-	           return ''+
-	               this.series.name +': '+ this.y +' millions';
-	       }
-	   },
-	   plotOptions: {
-	       bar: {
-	           dataLabels: {
-	               enabled: true
-	           }
-	       }
-	   },
-	   legend: {
-	       layout: 'vertical',
-	       align: 'right',
-	       verticalAlign: 'top',
-	       x: -100,
-	       y: 100,
-	       floating: true,
-	       borderWidth: 1,
-	       backgroundColor: '#FFFFFF',
-	       shadow: true
-	   },
-	   credits: {
-	       enabled: false
-	   }
-	 }
-
-	var chart = React.render(
-	  React.createElement(Chart, {
-	    seriesModel: seriesObject, 
-	    chartModel: chartObject}),
-	  document.getElementById('jcgCapitalChart')
-	);
+	// var chart = React.render(
+	//   React.createElement(Chart, {
+	//     seriesModel: seriesObject, 
+	//     chartModel: chartObject}),
+	//   document.getElementById('jcgCapitalChart')
+	// );
 
 	module.exports = Chart
 
@@ -170,6 +101,33 @@
 
 /***/ },
 /* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/** @jsx React.DOM *//** @jsx React.DOM */
+	'use strict';
+
+	var MenuBar = __webpack_require__(3)
+	var MenuItems = __webpack_require__(4)
+
+	var Chart = __webpack_require__(1)
+	var ChartOptions = __webpack_require__(5)
+
+	var App = React.createClass({displayName: "App",
+	  render: function(){
+	    console.log(MenuItems)
+	    return (
+	        //React.createElement(Chart, ChartOptions)
+	      React.createElement(MenuBar, MenuItems)
+
+	    )
+	  }
+	});
+
+	React.render(React.createElement(App, null), document.getElementById('THEAPP'));
+
+
+/***/ },
+/* 3 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */var MenuBar = React.createClass({displayName: "MenuBar",
@@ -286,7 +244,7 @@
 	module.exports = MenuBar
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports) {
 
 	/** @jsx React.DOM */var menuitems =    [
@@ -307,96 +265,81 @@
 	        }
 	    ]
 
-	module.exports = menuitems
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	/** @jsx React.DOM */var CodeMirror = React.createFactory(CodeMirrorEditor);
-	var div = React.createFactory('div');
-	var h1 = React.createFactory('h1');
-	var p = React.createFactory('p');
-	var pre = React.createFactory('pre');
-	var code = React.createFactory('code');
-
-	var Editor = React.createClass({displayName: "Editor",
-	  getInitialState: function () {
-	    return {
-	      src: 'function add(a, b) {\n' +
-	           '  return a + b;\n' +
-	           '}'
-	    };
-	  },
-	  render: function () {
-	    return div({},
-	      h1({}, 'We Got Text Editor'),
-	      p({}, 'This creates a typical, editable code mirror editor that responds to changes.'),
-	      CodeMirror({
-	        style: {border: '1px solid black'},
-	        textAreaClassName: ['form-control'],
-	        textAreaStyle: {minHeight: '10em'},
-	        value: this.state.src,
-	        mode: 'javascript',
-	        theme: 'solarized',
-	        lineNumbers: true,
-	        onChange: function (e) {
-	          this.setState({src: e.target.value});
-	        }.bind(this)
-	      })
-	    )
-	  },
-	});
-
-	//React.render(React.createElement(Editor), document.getElementById('jcgCapitalEditor'));
-
-	module.exports = Editor
+	module.exports = {config: menuitems}
 
 /***/ },
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	/** @jsx React.DOM */
-	(function(){
+	/** @jsx React.DOM */var seriesModel = [{
+	      name: 'Year 1800',
+	      data: [107, 31, 635, 203, 2]
+	  }, {
+	      name: 'Year 1900',
+	      data: [133, 156, 947, 408, 6]
+	  }, {
+	      name: 'Year 2008',
+	      data: [973, 914, 1000, 732, 34]
+	}];
 
-	  // incomplete animations
-	  var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+	var chartModel = {
+	   chart: {
+	       renderTo: 'container',
+	       type: 'line',
+	   },
+	   title: {
+	       text: 'Historic World Population by Region'
+	   },
+	   subtitle: {
+	       text: 'Source: Wikipedia.org'
+	   },
+	   xAxis: {
+	       categories: ['Africans', 'America', 'Asia', 'Europe', 'Oceania'],
+	       title: {
+	           text: null
+	       }
+	   },
+	   yAxis: {
+	       min: 0,
+	       title: {
+	           text: 'Population (millions)',
+	           align: 'high'
+	       },
+	       labels: {
+	           overflow: 'justify'
+	       }
+	   },
+	   tooltip: {
+	       formatter: function() {
+	           return ''+
+	               this.series.name +': '+ this.y +' millions';
+	       }
+	   },
+	   plotOptions: {
+	       bar: {
+	           dataLabels: {
+	               enabled: true
+	           }
+	       }
+	   },
+	   legend: {
+	       layout: 'vertical',
+	       align: 'right',
+	       verticalAlign: 'top',
+	       x: -100,
+	       y: 100,
+	       floating: true,
+	       borderWidth: 1,
+	       backgroundColor: '#FFFFFF',
+	       shadow: true
+	   },
+	   credits: {
+	       enabled: false
+	   }
+	 }
 
-	  var MenuBar = __webpack_require__(2)
-	  var MenuItems = __webpack_require__(3)
 
-	  var Graph = __webpack_require__(1)
-
-	  // var Editor = require('../codeeditorview/CodeMirror.jsx')
-
-	  // console.log(MenuBar, MenuItems, Graph, Editor)
-	  // document.write(MenuBar, MenuItems, Graph, Editor)
-
-	  // <MenuBar config={ MenuItems } />
-	  // <div id="jcgCapitalChart"></div>
-	  // <div id="jcgCapitalEditor"></div>
-
-
-	  var MainView = React.createClass({displayName: "MainView",
-	    render: function(){
-	      console.log(MenuItems)
-	      return (
-	        React.createElement("div", null, 
-	          React.createElement(MenuBar, null)
-	        )
-
-	      )
-	    }
-	  })
-
-
-	  React.render(React.createElement(MainView, null), document.getElementById('WTF'));
-
-
-
-
-	  
-	})()
+	module.exports = {seriesModel: seriesModel, chartModel: chartModel}
 
 
 /***/ }

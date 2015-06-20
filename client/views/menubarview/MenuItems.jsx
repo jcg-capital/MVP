@@ -16,4 +16,4 @@ var menuitems =    [
         }
     ]
 
-module.exports = menuitems
+module.exports = {config: menuitems}

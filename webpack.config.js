@@ -5,9 +5,9 @@ var webpack = require("webpack");
 module.exports = {
     entry: [
     		'./client/views/graphview/chart.jsx',
-    		'./client/views/menubarview/MenuBarView.jsx',
-            './client/views/menubarview/MenuItems.jsx',
-    		'./client/views/codeeditorview/CodeMirror.jsx',
+    		// './client/views/menubarview/MenuBarView.jsx',
+            // './client/views/menubarview/MenuItems.jsx',
+    		// './client/views/codeeditorview/CodeMirror.jsx',
             './client/views/mainView/mainView.jsx',
             ],
     output: {
