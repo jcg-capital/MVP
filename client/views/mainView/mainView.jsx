@@ -1,24 +1,41 @@
-// incomplete animations
 
-var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+(function(){
 
-var MainView = React.createClass({
-  render: function(){
-    return (
-      <div id="jcgCapital">
-        <ReactCSSTransitionGroup transitionName="example" transitionAppear={true}>
-          <h1>JCG Capital</h1>
-        </ReactCSSTransitionGroup>
-        <h3><strong>Partners:</strong> J. A. Munsch, G. H. Fitzgerald, and C. S. Harding</h3>
+  // incomplete animations
+  var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-        <div id="jcgCapitalChart"></div>
-        <div id="jcgCapitalMenu"></div>
-        <div id="jcgCapitalEditor"></div>
+  var MenuBar = require('../menubarview/MenuBarView.jsx')
+  var MenuItems = require('../menubarview/MenuItems.jsx')
+
+  var Graph = require('../graphview/chart.jsx')
+
+  // var Editor = require('../codeeditorview/CodeMirror.jsx')
+
+  // console.log(MenuBar, MenuItems, Graph, Editor)
+  // document.write(MenuBar, MenuItems, Graph, Editor)
+
+  // <MenuBar config={ MenuItems } />
+  // <div id="jcgCapitalChart"></div>
+  // <div id="jcgCapitalEditor"></div>
 
 
-      </div>
-    )
-  }
-})
+  var MainView = React.createClass({
+    render: function(){
+      console.log(MenuItems)
+      return (
+        <div>
+          <MenuBar />
+        </div>
 
-React.render(< MainView />, document.body);
+      )
+    }
+  })
+
+
+  React.render(<MainView />, document.getElementById('WTF'));
+
+
+
+
+  
+})()

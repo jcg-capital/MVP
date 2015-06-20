@@ -11,6 +11,9 @@ var gulp = require('gulp'),
     webpack = require("webpack"),
     WebpackDevServer = require("webpack-dev-server"),
     webpackConfig = require("./webpack.config.js"),
+    browserify = require('browserify'),
+    source = require("vinyl-source-stream"),
+    reactify = require('reactify')
 
     package = require('./package.json');
 
@@ -60,48 +63,33 @@ gulp.task('browser-sync', function() {
     });
 });
 
-// // The development server (the recommended option for development)
-// gulp.task("default", ["webpack-dev-server"]);
-
-// Build and watch cycle (another option for development)
-// Advantage: No server required, can run app from filesystem
-// Disadvantage: Requests are not blocked until bundle is available,
-//               can serve an old app on refresh
-gulp.task("build-dev", ["webpack:build-dev"], function() {
-  gulp.watch(["app/**/*"], ["webpack:build-dev"]);
+gulp.task("webpack", function(callback) {
+    var JCG_Config = Object.create(webpackConfig);
+    // run webpack
+    webpack(JCG_Config, function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack", err);
+        gutil.log("[webpack]", stats.toString({
+            // output options
+        }));
+        callback();
+    })
 });
 
-// Production build
-gulp.task("build", ["webpack:build"]);
-
-gulp.task("webpack:build", function(callback) {
-  // modify some webpack config options
-  var myConfig = Object.create(webpackConfig);
-  myConfig.plugins = myConfig.plugins.concat(
-    new webpack.DefinePlugin({
-      "process.env": {
-        // This has effect on the react lib size
-        "NODE_ENV": JSON.stringify("production")
-      }
-    }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
-  );
-
-  // run webpack
-  webpack(myConfig, function(err, stats) {
-    if(err) throw new gutil.PluginError("webpack:build", err);
-    gutil.log("[webpack:build]", stats.toString({
-      colors: true
-    }));
-    callback();
-  });
+gulp.task('browserify', function(){
+  gulp.src('client/views/**/*.jsx')
+    .pipe(browserify({
+        entries: ['client/views/**/*.jsx'],
+        transform: [reactify],
+    })
+    .pipe(gulp.dest('./client/build/bundle.js'))
 });
+
 gulp.task('bs-reload', function () {
     browserSync.reload();
 });
 
-gulp.task('default', ['css', 'js', 'browser-sync'], function () {
+gulp.task('default', ['css', 'js', 'webpack', 'browser-sync'], function () {
+    gulp.watch("client/views/**/*.jsx", ['webpack']);
     gulp.watch("client/scss/*/*.scss", ['css']);
     gulp.watch("client/js/*.js", ['js']);
     gulp.watch("client/*.html", ['bs-reload']);

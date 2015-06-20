@@ -106,4 +106,6 @@ var chart = React.render(
   document.getElementById('jcgCapitalChart')
 );
 
+module.exports = Chart
+
 // var chart = React.render( < Chart config={seriesModel: seriesObject, chartModel: chartObject} />, document.getElementById('jcgCapitalApp'));

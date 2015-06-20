@@ -4,7 +4,8 @@ var server = require('http').createServer(app);
 var fs = require('fs');
 // Added config.js to gitignore  - has quandl api key and sets process.env.NODE_ENV = 'development';
 var config = require('./config.js');
-
+var path = require('path')
+var url = require('url')
 
 server.listen(9000, function () {
   var host = server.address().address;
@@ -27,6 +28,25 @@ var options = {
 
 app.use(express.static("client"));
 
+
+app.get('/node_modules/*', function(req, res){
+  var options = {
+    root: __dirname + '/../',
+    dotfiles: 'deny',
+    headers: {
+      'x-timestamp' : Date.now(),
+      'x-sent' : true
+    }
+  }
+  options.root = options.root + path.parse(req.url).dir
+  res.sendFile(path.parse(req.url).base, options, function(err){
+      if (err) {
+        console.log(err, options)
+      } 
+    })
+})
+
+
 app.get('/', function(req, res){
   res.sendFile('index.html', options, function(err){
     if (err) {
@@ -37,7 +57,7 @@ app.get('/', function(req, res){
 
 var Quandl = require('quandl')
 var quandl = new Quandl({
-    auth_token: config.QUANDLTOKEN,
+    auth_token: '',
     api_version: 1,
 });
 
